@@ -18,7 +18,7 @@ public class Base {
 	public WebDriver initializeDriver() throws Exception {
 
 		Properties prop = new Properties();
-		FileInputStream fis = new FileInputStream("F:\\CompleteAtuomation_Framework\\E2EProject\\src\\main\\java\\data.properties");
+		FileInputStream fis = new FileInputStream("F:\\CompleteAtuomation_Framework\\E2EProject\\src\\main\\java\\resources\\data.properties");
 		prop.load(fis);
 		String browserName = prop.getProperty("browser");
 		System.out.println(browserName);
