@@ -1,5 +1,7 @@
 package academy;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
@@ -9,23 +11,29 @@ import pageObjects.*;
 import resources.Base;
 
 public class HomePage extends Base{
+
+	public static Logger log = LogManager.getLogger(Base.class.getName());
 	
 	@BeforeTest
 	public void Initialize() throws Exception 
 	{
 		driver = initializeDriver();
-		driver.get(prop.getProperty("url"));
+		log.info("Driver is intialized");
+
 	}
 
 	@Test(dataProvider="getData")
 	public void basePageNavigation(String Username, String Password) throws Exception 
 	{
+		driver.get(prop.getProperty("url"));
+		log.info("Navigated to QAAcdemy Successfully");
 		LandingPage l = new LandingPage(driver);
 		l.getLogin().click();
 		LoginPage lp = new LoginPage(driver);
 		lp.getEmail().sendKeys(Username);
 		lp.getPassword().sendKeys(Password);
-		lp.getLogin().click();	
+		lp.getLogin().click();
+		log.info("Login page validated successfully");
 	}
 
 	@AfterTest
@@ -33,7 +41,7 @@ public class HomePage extends Base{
 	{
 		driver.close();
 	}
-	
+
 	@DataProvider
 	public Object[][] getData()
 	{
